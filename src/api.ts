@@ -6,15 +6,7 @@ const userAPI = {
             method: "GET",
         });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            const error = new Error(errorData.detail || `HTTP error! status: ${response.status}`);
-            (error as any).status = response.status;
-            throw error;
-        }
-
-        const data = await response.json();
-        return data["message"];
+        return response;
     }
 };
 
