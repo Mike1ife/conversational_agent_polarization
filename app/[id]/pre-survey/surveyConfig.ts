@@ -9,6 +9,7 @@ export interface SurveyQuestion {
     max?: number;
     minLabel?: string;
     maxLabel?: string;
+    allowNotApplicable?: boolean;
 }
 
 export interface SurveyPage {
@@ -33,12 +34,13 @@ export const preSurveyPages: SurveyPage[] = [
         },
         {
             type: "rating",
-            name: "familiarity",
-            question: "How familiar are you with reading and writing in English?",
+            name: "politicalOrientation",
+            question: "How would you describe your political orientation?",
             min: 1,
-            max: 5,
-            minLabel: "Not familiar at all",
-            maxLabel: "Extremely familiar"
+            max: 7,
+            minLabel: "Very conservative",
+            maxLabel: "Very liberal",
+            allowNotApplicable: true
         }]
     },
     {

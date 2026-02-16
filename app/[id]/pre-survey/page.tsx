@@ -74,6 +74,7 @@ export default function PreSurvey({ params }: { params: Promise<{ id: string; }>
                         max={q.max || 5}
                         minLabel={q.minLabel || ""}
                         maxLabel={q.maxLabel || ""}
+                        allowNotApplicable={q.allowNotApplicable || false}
                         selectedValue={responses[q.name]}
                     />
                 );

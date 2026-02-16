@@ -15,6 +15,11 @@ export default function Instruction({ params }: { params: Promise<{ id: string; 
         router.push(`/${id}/pre-survey`);
     };
 
+    const onDisagree = async () => {
+        await api.user.advanceUserState(id, { state: "complete" });
+        router.push(`/${id}/thankyou`);
+    };
+
     return (
         <main className="flex flex-col items-center justify-center gap-12 px-80 py-8">
             <InstructionSection title="Study Information & Consent" titleSize="3xl">
@@ -60,11 +65,16 @@ export default function Instruction({ params }: { params: Promise<{ id: string; 
                 </ul>
             </InstructionSection>
 
-            <div className="flex justify-start w-full">
+            <div className="flex justify-start w-full space-x-3">
                 <button
-                    className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-semibold px-6 py-2 rounded-lg transition-colors"
-                    onClick={() => onAgree()}>
+                    className="btn-blue"
+                    onClick={onAgree}>
                     I Agree to Participate
+                </button>
+                <button
+                    className="btn-zinc"
+                    onClick={onDisagree}>
+                    I do not Agree
                 </button>
             </div>
         </main>
