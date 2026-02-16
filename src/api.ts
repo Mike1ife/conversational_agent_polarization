@@ -1,8 +1,8 @@
 import { SurveyResponses, UserState } from "./interfaces";
 
 // https://conversational-agent-polarization-b.vercel.app/docs
-const apiUrl = "https://conversational-agent-polarization-b.vercel.app";
-// const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+// const apiUrl = "https://conversational-agent-polarization-b.vercel.app";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const userAPI = {
     validateStudyID: async (id: string) => {
