@@ -15,7 +15,7 @@ async function getUserPath(id: string) {
     return statePath[data.state];
 }
 
-export default async function IdPage({ params }: { params: Promise<{ id: string; }>; }) {
+export default async function RootPage({ params }: { params: Promise<{ id: string; }>; }) {
     const { id } = await params;
     const nextPath = await getUserPath(id);
     if (!nextPath) redirect("/error");

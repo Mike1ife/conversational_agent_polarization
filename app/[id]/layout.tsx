@@ -2,7 +2,7 @@ import api from "@/src/api";
 import Header from "@/src/components/layout/Header";
 import { redirect } from "next/navigation";
 
-export default async function IdLayout({ params, children }: {
+export default async function RootLayout({ params, children }: {
     params: Promise<{ id: string; }>;
     children: React.ReactNode;
 }) {
