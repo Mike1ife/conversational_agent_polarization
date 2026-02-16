@@ -1,30 +1,45 @@
-import { UserState } from "./interfaces";
+import { SurveyResponses, UserState } from "./interfaces";
 
 // https://conversational-agent-polarization-b.vercel.app/docs
-// const apiUrl = "https://conversational-agent-polarization-b.vercel.app";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = "https://conversational-agent-polarization-b.vercel.app";
+// const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const userAPI = {
-    validateStudyID: async (studyID: string) => {
-        const response = await fetch(`${apiUrl}/validate/${studyID}`);
+    validateStudyID: async (id: string) => {
+        const response = await fetch(`${apiUrl}/validate/${id}`);
         return response;
     },
-    getUserState: async (studyID: string) => {
-        const response = await fetch(`${apiUrl}/state/${studyID}`);
+    getUserState: async (id: string) => {
+        const response = await fetch(`${apiUrl}/state/${id}`);
         const data: UserState = await response.json();
         return data;
     },
-    advanceUserState: async (studyID: string, nextState: UserState) => {
-        await fetch(`${apiUrl}/advance/${studyID}`, {
+    advanceUserState: async (id: string, nextState: UserState) => {
+        const response = await fetch(`${apiUrl}/advance/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(nextState),
         });
+        if (!response.ok) throw new Error('Failed to advance user');
+        return await response.json();
+    }
+};
+
+const preSurveyAPI = {
+    savePreSurvey: async (id: string, responses: SurveyResponses) => {
+        const response = await fetch(`${apiUrl}/survey/pre/${id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(responses),
+        });
+        if (!response.ok) throw new Error('Failed to save survey');
+        return await response.json();
     }
 };
 
 export default {
-    user: userAPI
+    user: userAPI,
+    preSurvey: preSurveyAPI
 };

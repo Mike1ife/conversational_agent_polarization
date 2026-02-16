@@ -11,7 +11,7 @@ export default function Header({ id }: { id: string; }) {
                         alt="Logo"
                         width={100}
                         height={100}
-                        className="object-contain"
+                        className="w-auto h-6 object-contain"
 
                     />
                     <h1 className="text-lg font-semibold">

@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+
+.btn-blue {
+    @apply bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-semibold px-6 py-2 rounded-lg transition-colors;
+}
+
+.btn-zinc {
+    @apply bg-zinc-400 hover:bg-zinc-500 cursor-pointer text-white font-semibold px-6 py-2 rounded-lg transition-colors;
+}

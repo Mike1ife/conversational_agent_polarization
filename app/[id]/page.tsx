@@ -1,14 +1,13 @@
 import api from "@/src/api";
 import { UserState, ValidState } from "@/src/interfaces";
 import { redirect } from "next/navigation";
-import React from "react";
 
 const statePath: Record<ValidState, string> = {
     "not_started": "instruction",
     "pre_survey": "pre-survey",
-    "conversation": "instruction",
-    "post_survey": "instruction",
-    "complete": "instruction"
+    "conversation": "conversation",
+    "post_survey": "post-survey",
+    "complete": "thankyou"
 };
 
 async function getUserPath(id: string) {

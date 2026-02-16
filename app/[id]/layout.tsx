@@ -1,5 +1,5 @@
 import api from "@/src/api";
-import Header from "@/src/components/Header";
+import Header from "@/src/components/layout/Header";
 import { redirect } from "next/navigation";
 
 export default async function IdLayout({ params, children }: {
