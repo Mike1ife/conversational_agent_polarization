@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-50">
@@ -8,12 +6,6 @@ export default function Home() {
         <p className="text-zinc-600">
           Use the study link provided to you. It should include a study ID.
         </p>
-        <Link
-          className="w-fit rounded-md border border-zinc-200 px-4 py-2 text-zinc-900"
-          href="/demo"
-        >
-          Example: /demo
-        </Link>
       </div>
     </main>
   );

@@ -1,16 +1,11 @@
-"use client";
-
-import { checkState, routeToState } from "@/src/route";
+import Survey from "@/src/components/survey/Survey";
 import React from "react";
+import { postSurveyPages } from "./surveyConfig";
 
 export default function PostSurvey({ params }: { params: Promise<{ id: string; }>; }) {
     const { id } = React.use(params);
 
-    checkState(id, "post_survey");
-
     return (
-        <main className="flex flex-col items-start justify-center gap-12 px-80 py-8">
-            <button className="btn-blue" onClick={() => routeToState(id, "complete")}>Next</button>
-        </main>
+        <Survey id={id} surveyType="post" surveyPage={postSurveyPages} />
     );
 }

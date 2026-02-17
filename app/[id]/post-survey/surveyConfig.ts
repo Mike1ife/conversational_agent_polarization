@@ -1,6 +1,6 @@
 import { SurveyPage } from "@/src/interfaces";
 
-export const preSurveyPages: SurveyPage[] = [
+export const postSurveyPages: SurveyPage[] = [
     {
         questions: [
             {

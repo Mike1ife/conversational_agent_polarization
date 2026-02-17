@@ -1,4 +1,14 @@
-export default function ChoiceQuestion({ name, question, options, selectedValue }: { name: string, question: string, options: string[], selectedValue?: string; }) {
+export default function ChoiceQuestion({
+    name,
+    question,
+    options,
+    selectedValue
+}: {
+    name: string,
+    question: string,
+    options: string[],
+    selectedValue?: string;
+}) {
     return (
         <fieldset className="border border-zinc-300 px-4 pt-3 pb-4">
             <legend className="px-2 text-lg font-medium">

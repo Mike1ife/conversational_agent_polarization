@@ -1,6 +1,22 @@
 export default function RatingQuestion({
-    name, question, min, max, minLabel, maxLabel, allowNotApplicable, selectedValue
-}: { name: string, question: string, min: number, max: number, minLabel: string, maxLabel: string, allowNotApplicable: boolean, selectedValue?: string; }) {
+    name,
+    question,
+    min,
+    max,
+    minLabel,
+    maxLabel,
+    allowNotApplicable,
+    selectedValue
+}: {
+    name: string,
+    question: string,
+    min: number,
+    max: number,
+    minLabel: string,
+    maxLabel: string,
+    allowNotApplicable: boolean,
+    selectedValue?: string;
+}) {
     return (
         <fieldset className="border border-zinc-300 px-4 pt-3 pb-4">
             <legend className="px-2 text-lg font-medium">

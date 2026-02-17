@@ -2,8 +2,19 @@
 
 import { useEffect, useState } from "react";
 
-export default function DiscreteScaleQuestion({ name, question, valueLabels, initialIndex, selectedValue }:
-    { name: string, question: string, valueLabels: string[], initialIndex: number, selectedValue?: string; }) {
+export default function DiscreteScaleQuestion({
+    name,
+    question,
+    valueLabels,
+    initialIndex,
+    selectedValue
+}: {
+    name: string,
+    question: string,
+    valueLabels: string[],
+    initialIndex: number,
+    selectedValue?: string;
+}) {
     const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
     const currentLabel = valueLabels[currentIndex];
     const labelCount = valueLabels.length;
@@ -43,51 +54,49 @@ export default function DiscreteScaleQuestion({ name, question, valueLabels, ini
                 value={currentLabel}
                 required={true}
             />
-            <div className="space-y-2 mt-2">
 
-                <div className="mt-4 space-y-4">
-                    <div className="text-center">
-                        <span className="text-xl font-semibold text-blue-600">
-                            {currentLabel !== null ? currentLabel : 'Click on the scale below'}
-                        </span>
-                    </div>
+            <div className="mt-4 space-y-4">
+                <div className="text-center">
+                    <span className="text-xl font-semibold text-blue-600">
+                        {currentLabel}
+                    </span>
+                </div>
 
-                    <div className="relative">
-                        <div className="absolute top-1/2 left-0 right-0 h-2 bg-zinc-200 rounded-full -translate-y-1/2" />
+                <div className="relative">
+                    <div className="absolute top-1/2 left-0 right-0 h-2 bg-zinc-200 rounded-full -translate-y-1/2" />
 
-                        {currentIndex !== initialIndex && (
-                            <div
-                                className="absolute top-1/2 h-2 bg-blue-600 rounded-full -translate-y-1/2 transition-all duration-200"
-                                style={{
-                                    left: `${leftPercent}%`,
-                                    width: `${widthPercent}%`,
-                                }}
-                            />
-                        )}
+                    {currentIndex !== initialIndex && (
+                        <div
+                            className="absolute top-1/2 h-2 bg-blue-600 rounded-full -translate-y-1/2 transition-all duration-200"
+                            style={{
+                                left: `${leftPercent}%`,
+                                width: `${widthPercent}%`,
+                            }}
+                        />
+                    )}
 
-                        <div className="relative flex justify-between items-center">
-                            {valueLabels.map((label, index) => (
-                                <button
-                                    key={index}
-                                    type="button"
-                                    onClick={() => handleDotClick(index)}
-                                    className={`
+                    <div className="relative flex justify-between items-center">
+                        {valueLabels.map((label, index) => (
+                            <button
+                                key={index}
+                                type="button"
+                                onClick={() => handleDotClick(index)}
+                                className={`
                                     relative z-10 w-5 h-5 rounded-full border-3 transition-all duration-200
                                     ${isActiveIndex(index)
-                                            ? 'bg-blue-600 border-blue-600 scale-110'
-                                            : 'bg-white border-zinc-300 hover:border-blue-400 hover:scale-105'}
+                                        ? 'bg-blue-600 border-blue-600 scale-110'
+                                        : 'bg-white border-zinc-300 hover:border-blue-400 hover:scale-105'}
                                     cursor-pointer shadow-md
                                 `}
-                                    aria-label={`Select ${label}`}
-                                />
-                            ))}
-                        </div>
+                                aria-label={`Select ${label}`}
+                            />
+                        ))}
                     </div>
+                </div>
 
-                    <div className="flex justify-between text-sm font-medium text-zinc-800">
-                        <span>{valueLabels[0]}</span>
-                        <span>{valueLabels[labelCount - 1]}</span>
-                    </div>
+                <div className="flex justify-between text-sm font-medium text-zinc-800">
+                    <span>{valueLabels[0]}</span>
+                    <span>{valueLabels[labelCount - 1]}</span>
                 </div>
             </div>
         </fieldset>

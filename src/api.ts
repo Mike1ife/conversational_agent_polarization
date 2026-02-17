@@ -27,9 +27,9 @@ const userAPI = {
     }
 };
 
-const preSurveyAPI = {
-    savePreSurvey: async (id: string, responses: SurveyResponses) => {
-        const response = await fetch(`${apiUrl}/survey/pre/${id}`, {
+const surveyAPI = {
+    saveSurvey: async (id: string, surveyType: "pre" | "post", responses: SurveyResponses) => {
+        const response = await fetch(`${apiUrl}/survey/${surveyType}/${id}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(responses),
@@ -41,5 +41,5 @@ const preSurveyAPI = {
 
 export default {
     user: userAPI,
-    preSurvey: preSurveyAPI
+    preSurvey: surveyAPI
 };
