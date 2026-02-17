@@ -1,12 +1,13 @@
 "use client";
 
 import api from "@/src/api";
-import ChoiceQuestion from "@/src/components/survey/ChoiceQuestion";
 
-import { checkState } from "@/src/route";
+import { checkState, routeToState } from "@/src/route";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { preSurveyPages, SurveyQuestion } from "./surveyConfig";
+import ChoiceQuestion from "@/src/components/survey/ChoiceQuestion";
+import DiscreteScaleQuestion from "@/src/components/survey/DiscreteScaleQuestion";
 import RatingQuestion from "@/src/components/survey/RatingQuestion";
 
 export default function PreSurvey({ params }: { params: Promise<{ id: string; }>; }) {
@@ -23,8 +24,7 @@ export default function PreSurvey({ params }: { params: Promise<{ id: string; }>
         setIsSubmitting(true);
         try {
             await api.preSurvey.savePreSurvey(id, { responses: finalResponses });
-            await api.user.advanceUserState(id, { state: "conversation" });
-            router.push(`/${id}/conversation`);
+            routeToState(id, "intervention");
         } catch (error) {
             console.error('Error submitting survey:', error);
             router.push(`/${error}`);
@@ -33,7 +33,7 @@ export default function PreSurvey({ params }: { params: Promise<{ id: string; }>
         }
     };
 
-    const onNext = (e: React.SubmitEvent) => {
+    const handleNextClick = (e: React.SubmitEvent) => {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
@@ -61,6 +61,17 @@ export default function PreSurvey({ params }: { params: Promise<{ id: string; }>
                         name={q.name}
                         question={q.question}
                         options={q.options || []}
+                        selectedValue={responses[q.name]}
+                    />
+                );
+            case 'scale':
+                return (
+                    <DiscreteScaleQuestion
+                        key={q.name}
+                        name={q.name}
+                        question={q.question}
+                        valueLabels={q.valueLabels || []}
+                        initialIndex={q.initialIndex || 0}
                         selectedValue={responses[q.name]}
                     />
                 );
@@ -96,7 +107,7 @@ export default function PreSurvey({ params }: { params: Promise<{ id: string; }>
 
             <h1 className="text-3xl font-bold">Pre-Survey</h1>
 
-            <form onSubmit={onNext} className="space-y-6">
+            <form onSubmit={handleNextClick} className="space-y-6">
                 {preSurveyPages[currentPage].questions.map(renderQuestion)}
                 <div className="space-x-10">
                     {currentPage > 0 && <button

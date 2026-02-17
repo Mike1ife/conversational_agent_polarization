@@ -1,41 +1,29 @@
 "use client";
 
-import api from "@/src/api";
 import InstructionSection from "@/src/components/instruction/InstructionSection";
+import { routeToState } from "@/src/route";
 
-import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Instruction({ params }: { params: Promise<{ id: string; }>; }) {
     const { id } = React.use(params);
-    const router = useRouter();
-
-    const onAgree = async () => {
-        await api.user.advanceUserState(id, { state: "pre_survey" });
-        router.push(`/${id}/pre-survey`);
-    };
-
-    const onDisagree = async () => {
-        await api.user.advanceUserState(id, { state: "complete" });
-        router.push(`/${id}/thankyou`);
-    };
 
     return (
         <main className="flex flex-col items-center justify-center gap-12 px-80 py-8">
             <InstructionSection title="Study Information & Consent" titleSize="3xl">
-                You are invited to participate in a research study about how people use AI assistants to understand and reflect on public issues. Please read the information below before deciding whether to take part.
+                You are invited to participate in a research study about how people use AI assistants to engage with public issues. Please read the information below before deciding whether to take part.
             </InstructionSection>
 
             <InstructionSection title="Research Purpose">
-                This study examines how people seek, interpret, and reflect on information when interacting with conversational AI systems. You will engage with an AI assistant on two different public issues and answer a few questions before and after each interaction.
+                This study examines how people seek and interpret information when interacting with conversational AI systems. You will engage with an AI assistant on one public issue and answer a few questions before and after each interaction.
             </InstructionSection>
 
             <InstructionSection title="Procedures">
                 <p>If you agree to participate, you will complete an online session that includes:</p>
                 <ol className="list-decimal list-outside ml-12 space-y-2 mt-4">
                     <li>A brief questionnaire about your background and general opinions;</li>
-                    <li>Two short interactions with an AI assistant on different topics;</li>
-                    <li>Follow-up questionnaires about each interaction.</li>
+                    <li>Short interactions with an AI assistant;</li>
+                    <li>Follow-up questionnaires after interaction.</li>
                 </ol>
                 <p className="mt-4">The entire session will take approximately <strong>15–20 minutes</strong>.</p>
             </InstructionSection>
@@ -57,24 +45,19 @@ export default function Instruction({ params }: { params: Promise<{ id: string; 
             </InstructionSection>
 
             <InstructionSection title="Consent">
-                <p>If you agree to participate, you will complete an online session that includes:</p>
+                <p>By clicking “Next” and beginning the survey, you indicate that:</p>
                 <ul className="list-disc list-outside ml-12 space-y-2 mt-4">
-                    <li>A brief questionnaire about your background and general opinions;</li>
-                    <li>Two short interactions with an AI assistant on different topics;</li>
-                    <li>Follow-up questionnaires about each interaction.</li>
+                    <li>You are at least 18 years old,</li>
+                    <li>You have read and understood the information above, and</li>
+                    <li>You agree to take part in the study.</li>
                 </ul>
             </InstructionSection>
 
             <div className="flex justify-start w-full space-x-3">
                 <button
                     className="btn-blue"
-                    onClick={onAgree}>
-                    I Agree to Participate
-                </button>
-                <button
-                    className="btn-zinc"
-                    onClick={onDisagree}>
-                    I do not Agree
+                    onClick={() => routeToState(id, "pre_survey")}>
+                    Next
                 </button>
             </div>
         </main>
