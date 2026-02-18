@@ -1,7 +1,5 @@
-import { SurveyResponses, UserState } from "./interfaces";
+import { SurveyResponses, SurveyType, UserState } from "../types/interfaces";
 
-// https://conversational-agent-polarization-b.vercel.app/docs
-// const apiUrl = "https://conversational-agent-polarization-b.vercel.app";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const userAPI = {
@@ -28,7 +26,7 @@ const userAPI = {
 };
 
 const surveyAPI = {
-    saveSurvey: async (id: string, surveyType: "pre" | "post", responses: SurveyResponses) => {
+    saveSurvey: async (id: string, surveyType: SurveyType, responses: SurveyResponses) => {
         const response = await fetch(`${apiUrl}/survey/${surveyType}/${id}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

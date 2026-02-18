@@ -1,21 +1,20 @@
 "use client";
 
-import api from "@/src/api";
-
-import { checkState, routeToState } from "@/src/route";
+import { checkState, routeToState } from "@/src/utils/state";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import ChoiceQuestion from "@/src/components/survey/ChoiceQuestion";
 import DiscreteScaleQuestion from "@/src/components/survey/DiscreteScaleQuestion";
 import RatingQuestion from "@/src/components/survey/RatingQuestion";
 import ContinuousScaleQuestion from "@/src/components/survey/ContinuousScaleQuestion";
-import { SurveyPage, SurveyQuestion, ValidState } from "@/src/interfaces";
+import { SurveyPage, SurveyQuestion, SurveyType, ValidState } from "@/src/types/interfaces";
+import api from "@/src/utils/api";
 
-export default function Survey({ id, surveyType, surveyPage }: { id: string, surveyType: "pre" | "post", surveyPage: SurveyPage[]; }) {
+export default function Survey({ id, surveyType, surveyPage }: { id: string, surveyType: SurveyType, surveyPage: SurveyPage[]; }) {
     const router = useRouter();
 
     checkState(id, `${surveyType}_survey`);
-    const nextState: Record<"pre" | "post", ValidState> = { "pre": "intervention", "post": "complete" };
+    const nextState: Record<SurveyType, ValidState> = { "pre": "intervention", "post": "complete" };
 
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [responses, setResponses] = useState<Record<string, string>>({});

@@ -1,5 +1,5 @@
-import api from "@/src/api";
 import Header from "@/src/components/layout/Header";
+import api from "@/src/utils/api";
 import { redirect } from "next/navigation";
 
 export default async function RootLayout({ params, children }: {

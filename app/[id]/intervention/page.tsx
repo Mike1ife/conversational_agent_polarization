@@ -1,6 +1,6 @@
 "use client";
 
-import { checkState, routeToState } from "@/src/route";
+import { checkState, routeToState } from "@/src/utils/state";
 import React from "react";
 
 export default function Intervention({ params }: { params: Promise<{ id: string; }>; }) {

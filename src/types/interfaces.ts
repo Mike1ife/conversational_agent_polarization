@@ -1,3 +1,12 @@
+import { ReactNode } from "react";
+
+export interface InstructionItem {
+    title: string;
+    titleSize?: "xl" | "2xl" | "3xl";
+    content: ReactNode;
+}
+
+export type SurveyType = "pre" | "post";
 export type ValidState = "not_started" | "pre_survey" | "intervention" | "post_survey" | "complete";
 
 export interface UserState {

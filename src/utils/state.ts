@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import api from "./api";
-import { UserState, ValidState } from "./interfaces";
+import { UserState, ValidState } from "../types/interfaces";
 
 export const statePath: Record<ValidState, string> = {
     "not_started": "instruction",
